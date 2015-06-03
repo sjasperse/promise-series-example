@@ -20,19 +20,19 @@ var tasks = _.map(items, function (item) {
 });
 
 function callInOrder(list) {
-	function callRecursivee(head, tail) {
+	function callRecursive(head, tail) {
 		var headPromise = head();
 
 		if (tail.length > 0) {
 			return headPromise.then(function () {
-				return callRecursivee(tail[0], _.rest(tail));
+				return callRecursive(tail[0], _.rest(tail));
 			});
 		} else {
 			return headPromise;
 		}
 	}	
 
-	return callRecursivee(list[0], _.rest(list));
+	return callRecursive(list[0], _.rest(list));
 }
 
 console.log('Starting tasks...');
